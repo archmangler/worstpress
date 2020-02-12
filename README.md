@@ -4,7 +4,7 @@ User deployment guide
 - Deployment cycle test
 
 ```
-0. Clone down this repository ()
+0. Clone down this repository (https://github.com/archmangler/worstpress)
 1. Configure Azure cloud parameters in this file: ../.access.sh (use the provided access.sh template)
 2. Source the ../.access.sh to login to azure and set credentials
 3. run ./deploy.sh deploy
