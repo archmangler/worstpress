@@ -104,6 +104,9 @@ logic to automatically scale the application — it will be done by a human oper
 Requirement Analysis
 ====================
 
+- The requirements an be broken down as follows:
+
+```
 [] 1. Launch a WordPress application (You will easily find a suitable docker image) 
   
   [] 1.1 Therefore containerised W.P providing 
@@ -117,6 +120,7 @@ Requirement Analysis
      [] 3.1 without too much effort (scripting manual process into a cli tool often helps here) 
       [] 3.1.1 It is not a basic requirement to implement the logic to automatically scale the application (so no scaling metrics server, and no autoscaling/hpa required in this implementation) 
       [] 3.1.2 It will be done by a human operator (... via configuration yaml and deployment scripts).
+```
 
 NOTE: Security, data resilience and monitoring have not been specified as part of this requirement, therefore: we will omit:
 
@@ -139,21 +143,23 @@ Solution Architecture
 Technical Implementation
 =========================
 
-[] 1. Launch/deployment will be done via shell script wrapping terraform and kubectl cli utilities
-[] 2. Containerisation platform will be kubernetes (AKS)
-[] 3. Wordpress will use a definition .yaml and app+db containers
-[] 4. HA will be accomplished using replicas in a replicaset 
-[] 5. IP reachability will be provided using an NGINX ingress
-[] 6. DNS name will be implemented using Azures DNS service fronting ingress service end-point
-[] 7. Scale up/down will be done using a script wrapping a configuration yaml (or simply just kubectl)
-[] 8. For reproduceability, all code (infrastructure, platform etc ...) will be deployed from a versioning system (GitHub)
+- [] 1. Launch/deployment will be done via shell script wrapping terraform and kubectl cli utilities
+- [] 2. Containerisation platform will be kubernetes (AKS)
+- [] 3. Wordpress will use a definition .yaml and app+db containers
+- [] 4. HA will be accomplished using replicas in a replicaset 
+- [] 5. IP reachability will be provided using an NGINX ingress
+- [] 6. DNS name will be implemented using Azures DNS service fronting ingress service end-point
+- [] 7. Scale up/down will be done using a script wrapping a configuration yaml (or simply just kubectl)
+- [] 8. For reproduceability, all code (infrastructure, platform etc ...) will be deployed from a versioning system (GitHub)
 
 Optimisation notes
 ==================
 
-[] A CD server (e.g jenkins) can be used to deploy the applications 
-[] Autoscaling in response to inbound traffic load can be achieved by using Kubernetes Node scaling and HPA features.
-[] Additional user-friendly deployment and update tools can be provided by wrapping the deployment scripts in a CD pipeline
-[] Code and deployment quality can be improved by integrating continuous tests to a development environment using CI.
-[] Data resilience can be achieved by adding a container and data backup solution e.g VMware Velero
+The following enhancements are possible given the current deployment:
+
+- [] A CD server (e.g jenkins) can be used to deploy the applications 
+- [] Autoscaling in response to inbound traffic load can be achieved by using Kubernetes Node scaling and HPA features.
+- [] Additional user-friendly deployment and update tools can be provided by wrapping the deployment scripts in a CD pipeline
+- [] Code and deployment quality can be improved by integrating continuous tests to a development environment using CI.
+- [] Data resilience can be achieved by adding a container and data backup solution e.g VMware Velero
 
