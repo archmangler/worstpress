@@ -1,0 +1,31 @@
+#!/usr/bin/bash
+#WARNING: DO NOT COMMIT TO REPOS!!
+#Azure bootstrap access script
+
+#YOU WILL REQUIRE AN SP!! MAKE ONE FIRST!!
+#You may need to do the following once you've logged in to azure ("az login")
+#1. Create service principal
+#az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/${SUBSCRIPTION_ID}"
+#Where SUBSCRIPTION_ID is either the default "Pay-As-You-Go" or one you have created via the
+#Azure Portal (or via cli)
+
+#After your create your SP, fill in these details:
+#
+SUBSCRIPTION_ID="XXXXXXX-XXXXXXXXXX1"
+APP_ID="YYYYYYYYYYY-YYYYYYYYYYYYYYYYYYYY"
+APP_SECRET="WWWWWWWWWWWWWWWWWW-WWWWWWWWWWWWWWW"
+TENANT_ID="ZZZZZZZZZZZZZZZ-ZZZZZZZZZZZZZZZZ"
+USER_NAME="http://bootstrap_sp"
+
+#execute the login for Azure Cloud
+echo az login --service-principal -u ${USER_NAME} -p ${APP_SECRET} --tenant ${TENANT_ID}
+az login --service-principal -u ${USER_NAME} -p ${APP_SECRET} --tenant ${TENANT_ID}
+
+#switch to the correct subscription
+az account set --subscription="${SUBSCRIPTION_ID}"
+
+echo "Setting environment variables for Terraform"
+export ARM_SUBSCRIPTION_ID=${SUBSCRIPTION_ID}
+export ARM_CLIENT_ID="${APP_ID}"
+export ARM_CLIENT_SECRET="${APP_SECRET}"
+export ARM_TENANT_ID="${TENANT_ID}"

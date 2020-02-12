@@ -5,7 +5,7 @@ User deployment guide
 
 ```
 0. Clone down this repository ()
-1. Configure Azure cloud parameters in this file <>
+1. Configure Azure cloud parameters in this file: ../.access.sh (use the provided access.sh template)
 2. run ./deploy.sh deploy
 3. Paste the url provided into a browser upon deployment to confirm if the app is ready
 4. Do kubetcl get pods to list the deployed application pods 
