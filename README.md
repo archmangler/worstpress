@@ -61,6 +61,13 @@ wordpress-mariadb-0          0/1     ContainerCreating   0          6m54s
 52.187.174.117
 ```
 
+
+- Scaling the deployment: Run the following script to scale to 2 replicas for the wordpress pod:
+
+```
+utilities/scale.sh 2
+```
+
 Design and Implementation Process
 =================================
 
