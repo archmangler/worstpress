@@ -17,6 +17,10 @@ APP_SECRET="WWWWWWWWWWWWWWWWWW-WWWWWWWWWWWWWWW"
 TENANT_ID="ZZZZZZZZZZZZZZZ-ZZZZZZZZZZZZZZZZ"
 USER_NAME="http://bootstrap_sp"
 
+#Expose this to terraform as it will become the SP of the AKS cluster
+export TF_VAR_client_id="${APP_ID}"
+export TF_VAR_client_secret="${APP_SECRET}"
+
 #execute the login for Azure Cloud
 echo az login --service-principal -u ${USER_NAME} -p ${APP_SECRET} --tenant ${TENANT_ID}
 az login --service-principal -u ${USER_NAME} -p ${APP_SECRET} --tenant ${TENANT_ID}

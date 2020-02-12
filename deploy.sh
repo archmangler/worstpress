@@ -126,12 +126,24 @@ function cleanup () {
   cd ..
 }
 
+function get_kubeconfig () {
+  echo "extracting and saving kubeconfig ..."
+  mkdir -p ~/.kube/
+  terraform output -json | jq -r '.kube_config| .value' > ~/.kube/config
+  #assuming kubectl client utility is available
+  kubectl get nodes
+  kubectl get ns
+}
+
 function deploy_infrastructure () {
   #deploy containerisation platform and supporting IaaS components
   echo "deploying infrastructure and platform ..."
   init
   plan
   apply
+  #write kubeconfig to ~/.kube/config
+  #and test
+  get_kubeconfig
 }
 
 function deploy_application () {
@@ -143,7 +155,8 @@ function show_deploy_parameters () {
   #show results of the deployment
   echo "dumping final deploy status ..."
   echo "==============================="
-  terraform show
+  terraform output -json
+
 }
 
 function decommission_service (){
@@ -162,6 +175,14 @@ function decommission_service (){
 
 #setup terraform remote state storage
 bootstrap_terraform_state
+
+if [[ ${operation} == "plan" ]]; then
+  cd infrastructure/
+  init
+  plan
+  cd ../
+  cleanup
+fi
 
 if [[ ${operation} == "deploy" ]]; then
   cd infrastructure/
