@@ -127,6 +127,7 @@ function cleanup () {
 }
 
 function get_kubeconfig () {
+  ../utilities/getkubectl.sh
   echo "extracting and saving kubeconfig ..."
   mkdir -p ~/.kube/
   terraform output -json | jq -r '.kube_config| .value' > ~/.kube/config
@@ -149,6 +150,11 @@ function deploy_infrastructure () {
 function deploy_application () {
   #deploy application containers+configuration
   echo "deploying applications ..."
+  #create namespaces
+  kubectl apply -f application/application_namespace.yml
+  #deploy application charts
+  #deploying wordpress from Helm charts ...
+  helm install --namespace worstpress wordpress stable/wordpress
 }
 
 function show_deploy_parameters () {
@@ -187,10 +193,10 @@ fi
 if [[ ${operation} == "deploy" ]]; then
   cd infrastructure/
   deploy_infrastructure
-  deploy_application
   show_deploy_parameters
   cd ../
   cleanup
+  deploy_application
 fi
 
 if [[ ${operation} == "decomm" ]]; then
