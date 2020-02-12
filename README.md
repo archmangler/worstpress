@@ -11,7 +11,7 @@ User deployment guide
 4. Paste the url provided into a browser upon deployment to confirm if the app is ready
 5. Do kubetcl get pods to list the deployed application pods 
 6. Scale up: utilities/scale.sh 2
-7. Scale up: utilities/scale.sh 1 
+7. Scale down: utilities/scale.sh 1 
 8. Run ./deploy.sh decomm
 9. Check if the application is no longer available by visiting the URL again
 ```
