@@ -21,8 +21,8 @@ resource "azurerm_kubernetes_cluster" "worstpress" {
   //we could variablise better here
   default_node_pool {
     name       = "default"
-    node_count = 2
-    vm_size    = "Standard_D2_v2"
+    node_count = "${var.node_machine_count}" //2
+    vm_size    = "${var.node_machine_type}" //"Standard_D2_v2"
   }
 
   service_principal {

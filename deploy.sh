@@ -154,7 +154,7 @@ function deploy_application () {
   kubectl apply -f application/application_namespace.yml
   #deploy application charts
   #deploying wordpress from Helm charts ...
-  helm install --namespace worstpress wordpress stable/wordpress
+  helm install --namespace worstpress wordpress -f application/values.yml stable/wordpress
 }
 
 function show_deploy_parameters () {

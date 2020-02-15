@@ -1,5 +1,20 @@
 //Variables and default
 
+//24     node_count = "${var.node_machine_count}" //2
+//25     vm_size    = "${var.node_machine_type}" //"Standard_D2_v2"
+
+//The defaults specified below are really not adequate
+//based on testing. Do consider bumping up the node type
+//and possibly the count if you want H.A and capacity
+variable "node_machine_count" {
+  default = "1"
+}
+
+variable "node_machine_type" {
+  default = "Standard_D2_v2"
+}
+
+
 variable "customerCode" {
   default = "acme"
 }

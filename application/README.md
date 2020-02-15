@@ -1,3 +1,15 @@
+Blog Maintenance Notes
+======================
+
+- WP blog is based on the standard helm chart for wordpress available here:
+
+```
+https://github.com/helm/charts/tree/master/stable/wordpress
+```
+
+(As long as the containers and chart are available publically, this blog will be upgradeable and re-deployable)
+
+
 Story
 =====
 

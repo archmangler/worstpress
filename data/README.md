@@ -62,7 +62,6 @@ Solution Architecture
 - Database persistence will be provided by persistent volumes (which will in turn be provided by the containerisation platform)
 - Public network connectivity will be provided via a load-balancer endpoint which routes traffic to the application service port over HTTP/S
 
-
 Technical Implementation
 =========================
 
