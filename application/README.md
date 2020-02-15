@@ -9,6 +9,15 @@ https://github.com/helm/charts/tree/master/stable/wordpress
 
 (As long as the containers and chart are available publically, this blog will be upgradeable and re-deployable)
 
+- The values.yml provides a means to configure the parameters of the wordpress installation at deploy time.
+- To upgrade (or update) the parameters of the installation, the values.yml can be passed to helm as follows:
+
+```
+helm upgrade --namespace worstpress wordpress -f application/values.yml stable/wordpress
+```
+
+- NOTE: This can be incorporated into a Jenkins pipeline to automate this process within a CI/CD framework.
+
 
 Story
 =====
